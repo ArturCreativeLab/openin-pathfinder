@@ -1,0 +1,435 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar Styles (Light theme - for main content, chat) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f4f8; /* Lighter slate for track */
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Medium slate for thumb */
+  border-radius: 10px;
+  border: 2px solid #f0f4f8; /* Creates padding around thumb */
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Darker slate on hover */
+}
+
+/* Custom Scrollbar Styles (Dark theme - for dark side navigation) */
+.custom-scrollbar-dark::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-track {
+  background: #1e293b; /* Darker slate for track (slate-800) */
+  border-radius: 10px;
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb {
+  background: #475569; /* Medium dark slate for thumb (slate-600) */
+  border-radius: 10px;
+  border: 2px solid #1e293b; 
+}
+.custom-scrollbar-dark::-webkit-scrollbar-thumb:hover {
+  background: #64748b; /* Lighter dark slate on hover (slate-500) */
+}
+
+
+/* Spinner Animation Keyframes (already defined, ensure they are here) */
+@-webkit-keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}
+
+/* Basic Spinner Style */
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -0.125em;
+  border: .25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+}
+
+/* Small Spinner Style */
+.spinner-border-sm {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.125em;
+  border: .2em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Slide in Up Animation (for modal & chat panel) */
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slideInUp {
+  animation: slideInUp 0.3s ease-out forwards;
+}
+
+/* Slide out Down Animation (for chat panel) */
+@keyframes slideOutDown {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+.animate-slideOutDown {
+  animation: slideOutDown 0.3s ease-out forwards;
+}
+
+
+/* Tailwind Typography Plugin Defaults (if you're using @tailwindcss/typography) */
+/* You might want to customize prose styles here or in tailwind.config.js */
+.prose {
+  /* Default prose styles applied by the plugin */
+}
+.prose-sm {
+   /* Smaller prose styles */
+}
+
+/* Ensure html and body take full height for the sticky layout */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent horizontal scroll on body for screen, but allow for print if necessary (though unlikely needed) */
+@media screen {
+  body, #root {
+    overflow-x: hidden;
+  }
+}
+
+
+/* Specific styling for ContentCard as featured panels */
+.content-panel {
+  /* Add any specific panel styling here if needed beyond ContentCard defaults */
+  /* e.g., distinct background colors per panel type, if desired */
+}
+
+/* Styling for collapsible chat (floating icon when minimized) */
+.chat-fab {
+  /* Styles for the floating action button when chat is minimized */
+  /* Position, size, icon color etc. are handled by Tailwind classes in GlobalChat.tsx */
+}
+
+.chat-panel-expanded {
+  /* Styles for the chat panel when it's expanded */
+  /* Transition, shadow, dimensions etc. are handled by Tailwind classes in GlobalChat.tsx */
+}
+
+/* Transition utility for height changes (e.g. collapsibles) */
+.max-h-0 {
+  max-height: 0;
+}
+.max-h-screen { /* Or a specific max height like max-h-96 */
+  max-height: 100vh; /* Or appropriate value */
+}
+.transition-max-height {
+  transition-property: max-height;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms; /* Adjust as needed */
+}
+
+/* Topic highlighting styles */
+.topic-validated {
+  border-left: 4px solid #10B981; /* green-500 */
+  background-color: #F0FDF4; /* green-50 */
+}
+.topic-needs-reinforcement {
+  border-left: 4px solid #F59E0B; /* amber-500 */
+  background-color: #FFFBEB; /* amber-50 */
+}
+
+/* Footer Logo Styling - REMOVED as logos are now in AboutModal */
+/*
+.footer-logo {
+    max-height: 2.5rem; 
+    opacity: 0.85;
+    transition: opacity 0.2s ease-in-out;
+}
+.footer-logo:hover {
+    opacity: 1;
+}
+*/
+
+/* About Modal Logo Styling */
+.about-modal-logo {
+    max-height: 3rem; /* 48px, adjust as needed */
+    object-fit: contain; /* Ensure aspect ratio is maintained */
+    opacity: 0.9;
+}
+
+
+/* Print Styles */
+@media print {
+  body, html, #root {
+    height: auto;
+    overflow: visible !important; 
+    background-color: #fff !important; 
+    color: #000 !important; 
+    font-size: 10pt; 
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide ALL non-report elements by default when printing report */
+  .no-print,
+  body > div:not(.progress-report-container) > header, /* Dashboard header */
+  body > div:not(.progress-report-container) > div.flex.flex-1, /* Main layout flex container */
+  body > div:not(.progress-report-container) > footer.simplified-footer, /* Simplified footer on main app */
+  #left-navigation-panel, 
+  .global-chat-container,
+  .chat-fab,
+  .search-modal-container,
+  .onboarding-screen-container,
+  .app-fab-search-button,
+  .exam-modal-container,
+  .about-modal-container, /* Hide About Modal during print */
+  .print-only-header, /* Hide the old generic print header if report is active */
+  main.content-display-area button.interactive-button-in-section, /* Hides "Preguntar sobre esto" etc */
+  main.content-display-area button.topic-completion-button-print,
+  main.content-display-area button.key-concepts-toggle-print,
+  main.content-display-area .hide-on-print, /* Generic hide class for dashboard elements */
+  .report-button /* Hide the generate report button itself */
+   {
+    display: none !important;
+  }
+  
+  /* Ensure the ProgressReportPage container is visible and takes full width */
+  .progress-report-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important; /* Standard padding for the report page */
+    box-shadow: none !important;
+    border: none !important;
+    background-color: #fff !important;
+  }
+  
+  .report-header h1 {
+    font-size: 20pt;
+    color: #1d4ed8; /* Blue-700 */
+  }
+  .report-header p {
+     font-size: 10pt;
+     color: #4b5563; /* Gray-600 */
+  }
+
+  .report-section {
+    margin-bottom: 1.5rem !important;
+    padding: 1rem !important;
+    border: 1px solid #e5e7eb !important; /* Gray-200 */
+    border-radius: 0.5rem !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    background-color: #fff !important;
+  }
+  
+  .report-section-title {
+    font-size: 14pt !important;
+    color: #1e40af !important; /* Blue-800 */
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #d1d5db; /* Gray-300 */
+    margin-bottom: 0.75rem;
+  }
+  
+  .report-section h3 {
+    font-size: 11pt !important;
+    font-weight: 500 !important;
+    color: #1f2937 !important; /* Gray-800 */
+  }
+  .report-section p, .report-section li {
+    font-size: 9.5pt !important;
+    color: #374151 !important; /* Gray-700 */
+    line-height: 1.5;
+  }
+  .report-section ul {
+    margin-top: 0.25rem;
+  }
+  .report-section strong {
+    font-weight: 600;
+    color: #000;
+  }
+  .report-section .italic {
+    font-style: italic;
+    color: #4b5563; /* Gray-600 */
+  }
+
+  .report-logos-container {
+    page-break-inside: avoid !important;
+  }
+  .report-logo {
+    max-height: 28px !important; /* Slightly smaller for print density */
+    opacity: 0.8 !important;
+    margin: 0 4px !important; /* Adjust spacing for print */
+  }
+  .report-footer {
+    page-break-before: auto !important; /* Try to keep footer with content or on new page, not split */
+  }
+
+
+  /* Styles for old dashboard printing, if ProgressReportPage is NOT active */
+  /* These need to be more specific to avoid conflict if `isGeneratingReport` isn't perfectly isolating */
+  body:not(:has(.progress-report-container)) .print-only-header { /* If no report, use old header */
+    display: block !important;
+  }
+  
+  body:not(:has(.progress-report-container)) section[id^="summary"],
+  body:not(:has(.progress-report-container)) section[id^="initial-actions"],
+  body:not(:has(.progress-report-container)) section[id^="learning-path"],
+  body:not(:has(.progress-report-container)) section[id^="recommended-tools"],
+  body:not(:has(.progress-report-container)) section[id^="course-platforms"],
+  body:not(:has(.progress-report-container)) section[id^="exploratory-paths"],
+  body:not(:has(.progress-report-container)) section[id^="common-mistakes"],
+  body:not(:has(.progress-report-container)) section[id^="self-diagnosis-checklist"],
+  body:not(:has(.progress-report-container)) section[id^="recommended-ais"],
+  body:not(:has(.progress-report-container)) section[id^="exam-results"]
+  {
+    display: block !important; /* Ensure these are visible if not printing report */
+    margin-bottom: 20px !important;
+    padding: 15px !important; 
+    border: 1px solid #eee !important;
+    border-radius: 0 !important; 
+    box-shadow: none !important;
+    page-break-inside: avoid !important; 
+    background-color: #fff !important;
+  }
+  
+  body:not(:has(.progress-report-container)) section h1, 
+  body:not(:has(.progress-report-container)) section h2, 
+  body:not(:has(.progress-report-container)) section h3, 
+  body:not(:has(.progress-report-container)) section h4 {
+    color: #000 !important;
+    page-break-after: avoid !important;
+  }
+
+
+  /* SearchSuggestionDisplay print styles for report */
+  .print-search-suggestion {
+    display: inline !important;
+    color: #065f46 !important; /* Green-800 */
+    text-decoration: none !important;
+    font-style: italic;
+    font-size: 8.5pt !important;
+    margin-left: 4px !important;
+  }
+  .print-search-suggestion .bi-search {
+    display: none !important; /* Hide icon in report print */
+  }
+  .print-search-suggestion::before {
+    content: "(Buscar: ";
+  }
+   .print-search-suggestion::after {
+    content: ")";
+  }
+  
+  /* Fallback search suggestion for non-report print */
+  .search-suggestion-print:not(.print-search-suggestion) {
+    display: block !important;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-style: italic;
+    margin-top: 2px;
+    font-size: 9pt;
+  }
+  .search-suggestion-print:not(.print-search-suggestion) .bi-search {
+    display: inline !important;
+    margin-right: 3px;
+  }
+  .search-suggestion-print:not(.print-search-suggestion)::before {
+    content: "Sugerencia de búsqueda: ";
+  }
+
+
+  /* General print utilities for report context */
+  .progress-report-container .bg-blue-50, 
+  .progress-report-container .bg-green-50, 
+  .progress-report-container .bg-yellow-50,
+  .progress-report-container .bg-slate-50 {
+    background-color: #f8f9fa !important; /* Very light gray for subtle background differentiation */
+  }
+  .progress-report-container .text-blue-700,
+  .progress-report-container .text-blue-600 { color: #1d4ed8 !important; }
+  .progress-report-container .text-green-600 { color: #059669 !important; }
+  .progress-report-container .text-yellow-600 { color: #d97706 !important; }
+  .progress-report-container .text-gray-700 { color: #374151 !important; }
+  .progress-report-container .text-gray-600 { color: #4b5563 !important; }
+  .progress-report-container .text-gray-500 { color: #6b7280 !important; }
+   
+  .progress-report-container .border-gray-200,
+  .progress-report-container .border-blue-200,
+  .progress-report-container .border-green-200,
+  .progress-report-container .border-yellow-200,
+  .progress-report-container .border-slate-200 {
+      border-color: #dee2e6 !important; /* Light gray border */
+  }
+
+  /* Ensure LearningPathSection print styles are scoped if used outside report */
+  body:not(:has(.progress-report-container)) .learning-path-section-print .topic-item-print {
+    border: 1px solid #f0f0f0; padding: 8px; margin-bottom: 8px;
+  }
+   body:not(:has(.progress-report-container)) .learning-path-section-print .path-progress-bar-container-print {
+    display: none !important; /* Hide progress bar in non-report print */
+  }
+  /* ... other existing learning path print styles ... */
+
+  /* Ensure Checklist print styles are scoped if used outside report */
+   body:not(:has(.progress-report-container)) .checklist-section-print input[type="checkbox"] {
+    /* styles for checkbox visibility in non-report print */
+    display: inline-block !important; /* Ensure checkboxes are visible */
+    border: 1px solid #ccc !important; /* Visible border */
+    -webkit-appearance: checkbox !important;
+    appearance: checkbox !important;
+   }
+   body:not(:has(.progress-report-container)) .checklist-section-print .progress-bar-container-print {
+     display: none !important; /* Hide progress bar in non-report print */
+   }
+
+
+  /* Utility to hide elements specifically during print */
+  .hide-on-print { display: none !important; }
+}
+
+/* Ensure collapsibles can be forced open for print via a class */
+.print-force-visible {
+  display: block !important;
+  max-height: none !important; /* Override max-height for collapsibles */
+  opacity: 1 !important;
+  overflow: visible !important;
+}
+.print-hide-toggle {
+  display: none !important; /* Hide toggles in print if content is forced visible */
+}
