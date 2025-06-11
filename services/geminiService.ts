@@ -9,7 +9,7 @@ import type {
     ReportWebsiteSuggestion, ProgressReportData, ChecklistCompletionMap
 } from '../types';
 
-const API_KEY = process.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 if (!API_KEY) {
   // This alert is problematic in a non-browser environment or automated tests.
